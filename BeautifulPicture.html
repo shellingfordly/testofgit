@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>BeautifulPicture</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<script src="http://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<style>
+* {margin: 0; padding: 0;}
+a {text-decoration: none;}
+li {list-style: none;}
+section div p {
+    text-align: center;
+}
+section div img {
+    /*width: 200px;*/
+    /*height: 200px;*/
+    margin: 10px;
+}
+</style>
+</head>
+
+<body>
+    <section></section>
+
+
+<script>
+    let time = new Date().getTime();
+    $.ajax({
+        type : "GET",
+        url : `https://route.showapi.com/852-2?page=1&showapi_appid=71769&showapi_timestamp=${time}&type=2001&showapi_sign=7b3f37e48a06408dba924e53e41f2197`,
+        success : function(data){
+            console.log(data);
+            let conlist = data.showapi_res_body.pagebean.contentlist;
+            for (let i = 0, len = conlist.length; i < len; i++) {
+                addDiv(conlist[i]);
+            }
+        },
+        error : function(){
+            alert("出错");
+        }
+    });
+    // 图片类别
+    function addDiv(list){
+        let div = document.createElement("div");
+        div.className = "imgBox";
+        // 图片类型描述
+        let oP = document.createElement("p");
+        oP.innerHTML = list.title;
+        div.appendChild(oP);
+        for (let i = 0, len = list.list.length; i < len; i++) {
+            addImg(list.list[i],div);
+        }
+        $("section")[0].appendChild(div);
+    }
+    // 添加图片
+    function addImg(list,div){
+        let img = document.createElement("img");
+        img.src = list.big;
+        div.appendChild(img);
+    }
+</script>
+</body>
+</html>

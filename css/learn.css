@@ -1,0 +1,100 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2018-08-05 19:04:16
+ * @version $Id$
+ */
+* {margin: 0; padding: 0;}
+a {text-decoration: none;}
+li {list-style: none;}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+/* header */
+header {
+    position: relative;
+    width: 100%;
+    background: #444;
+    color: #fff;
+}
+header .start-title {
+    position: relative;
+    width: 300px;
+    margin: auto;
+    cursor: pointer;
+    text-align: center;
+    font-size: 30px;
+    line-height: 50px;
+}
+header div.start-title i.iconfont {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+/*section*/
+section {
+    position: relative;
+}
+/* 导航栏 */
+nav {
+    position: relative;
+    /*overflow: hidden;*/
+    width: 200px;
+    height: 976px;
+    padding: 10px;
+    background: #555;
+    color: #fff;
+}
+.sort li.list + li.list {
+    margin-top: 10px;
+}
+/*一级标题*/
+.sort .list h1 {
+    font-size: 18px;
+    font-weight: lighter;
+    margin-bottom: 5px;
+}
+.list .child {
+    display: none;
+}
+/*二级标题*/
+.list .child p {
+    cursor: pointer;
+    text-indent: 10px;
+    font-size: 16px;
+    line-height: 30px;
+}
+.list .child p:hover {
+    color: #e86;
+}
+
+/*具体单词message*/
+.message {
+    position: absolute;
+    top: 0;
+    left: 220px;
+    padding: 50px 80px;
+}
+.message .words {
+    width: 160px;
+    height: 180px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 0 10px 20px;
+    border-radius: 10px;
+    background: rgba(158,98,35,.5);
+    color: #fff;
+}
+.words p {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
