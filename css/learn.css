@@ -54,11 +54,18 @@ nav {
     background: #555;
     color: #fff;
 }
+.sort li.list {
+    background: #555;
+}
 .sort li.list + li.list {
     margin-top: 10px;
 }
+.sort li.list:hover > h1 {
+    color: #e86;
+}
 /*一级标题*/
 .sort .list h1 {
+    cursor: pointer;
     font-size: 18px;
     font-weight: lighter;
     margin-bottom: 5px;
@@ -91,7 +98,7 @@ nav {
     padding: 10px;
     margin: 0 10px 20px;
     border-radius: 10px;
-    background: rgba(158,98,35,.5);
+    background: #888;
     color: #fff;
 }
 .words p {

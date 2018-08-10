@@ -4,25 +4,38 @@
  * @date    2018-08-05 19:19:42
  * @version $Id$
  */
-// li分类显示隐藏
-function mouseChange(){
-    $(".list").mouseenter(function() {
-        $(this).children().eq(0).css("color","#e88");
-        $(this).children().eq(1).slideDown('slow');
-    });
-    $(".list").mouseleave(function() {
-        $(this).children().eq(0).css("color","#fff");
-        $(this).children().eq(1).slideUp('slow');
+// 点击显示隐藏li分类
+function listShow(){
+    let index = null;
+    $(".list").each(function(i,el) {
+        // console.log(index,el);
+        // console.log($(this).index);
+        el.onclick = function(){
+            if ( index !== null && index !== i ) {
+                $(".list").eq(index).children().eq(1).toggle("fast");
+            }
+            $(this).children().eq(1).toggle("fast");
+            index = i;
+        }
     });
 }
-mouseChange();
+
+// 鼠标移入移出显示隐藏li分类
+$(".list").mouseenter(function() {
+    $(this).children().eq(0).css("color","#e88");
+    $(this).children().eq(1).slideDown('slow');
+});
+$(".list").mouseleave(function() {
+    $(this).children().eq(0).css("color","#fff");
+    $(this).children().eq(1).slideUp('slow');
+});
 
 //获取分类
 (function (){
     let timestamp = new Date().getTime();
     $.ajax({
         type : "get",
-        url: `https://route.showapi.com/8-11?name=&showapi_appid=71747&showapi_sign=a3bddc89402541369be3bd222691375f&showapi_timestamp=${timestamp}`,
+        url: `https://route.showapi.com/8-11?name=&showapi_appid=71747&showapi_sign=ac3828bce7c94897beb45a952a2e5140&showapi_timestamp=${timestamp}`,
         dataType : "json",
         success : function(data){
             console.log(data)
@@ -59,7 +72,7 @@ function aadLi(typelist){
         // 在nav的ul里面添加每一个li类
         $(".sort")[0].appendChild(li);
     }
-    mouseChange();
+    console.log("执行了aadLi函数");
 }
 
 // 添加p标签
@@ -75,6 +88,7 @@ function addChildP(childlist, pdiv){
         };
         pdiv.appendChild(oP);
     }
+    console.log("执行了addChildP函数")
 }
 // getMessage(0,4)
 // 获取每个分类的具体数据
@@ -84,7 +98,7 @@ function getMessage(childlist,count){
     // childlist.word_num ：词汇数
     let timestamp = new Date().getTime();
     count ? count : count = 1;
-    let url = `https://route.showapi.com/8-10?showapi_appid=71747&showapi_sign=a3bddc89402541369be3bd222691375f&showapi_timestamp=${timestamp}&class_id=${childlist.class_id}&course=${count}`;
+    let url = `https://route.showapi.com/8-10?showapi_appid=71747&showapi_sign=ac3828bce7c94897beb45a952a2e5140&showapi_timestamp=${timestamp}&class_id=${childlist.class_id}&course=${count}`;
     $.ajax({
         type : "get",
         url: url,
@@ -105,6 +119,7 @@ function getMessage(childlist,count){
             alert("获取数据失败！");
         }
     });
+    console.log("执行了getMessage函数")
 }
 
 function addWordsDiv(list){
@@ -117,12 +132,22 @@ function addWordsDiv(list){
         symbolP = document.createElement("p"),
         meaning = document.createElement("p");
     wordP.innerHTML = list.name;
-    symbolP.innerHTML = list.symbol;
     meaning.innerHTML = list.desc;
+    let soundi = document.createElement("i"),
+        oSpan = document.createElement("span");
+    soundi.className = "iconfont icon-yinliang";
+    oSpan.innerHTML = list.symbol;
+    // 音标symbolP添加音标和声音
+    symbolP.appendChild(soundi);
+    symbolP.appendChild(oSpan);
     // 添加
     wordsDiv.appendChild(wordP);
     wordsDiv.appendChild(symbolP);
     wordsDiv.appendChild(meaning);
     // 将每个单词wordsDiv添加到message里面
     $(".message")[0].appendChild(wordsDiv);
+    console.log("执行了addWordsDiv函数")
 }
+
+// 生成数据之后再调用
+listShow();
